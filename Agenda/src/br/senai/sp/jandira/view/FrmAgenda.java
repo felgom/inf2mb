@@ -14,6 +14,10 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.border.EtchedBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmAgenda extends JFrame {
 
@@ -25,7 +29,7 @@ public class FrmAgenda extends JFrame {
 	public FrmAgenda() {
 		setTitle("Agenda de contatos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 467, 377);
 		painelPrincipal = new JPanel();
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
@@ -37,17 +41,45 @@ public class FrmAgenda extends JFrame {
 		painelPrincipal.add(painelTitulo);
 		painelTitulo.setLayout(null);
 		
-		JLabel lblAgenda = new JLabel("Agenda");
-		lblAgenda.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/agenda32.png")));
-		lblAgenda.setFont(new Font("Arial", Font.BOLD, 28));
-		lblAgenda.setBounds(10, 11, 414, 44);
-		painelTitulo.add(lblAgenda);
+		JLabel lblTituloTela = new JLabel(" Agenda");
+		lblTituloTela.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/agenda48.png")));
+		lblTituloTela.setFont(new Font("Arial", Font.BOLD, 32));
+		lblTituloTela.setBounds(10, 0, 414, 66);
+		painelTitulo.add(lblTituloTela);
 		
 		painelTabela = new JPanel();
 		painelTabela.setBorder(new TitledBorder(null, "Meus Contatos", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(51, 0, 204)));
-		painelTabela.setBounds(0, 64, 434, 197);
+		painelTabela.setBounds(10, 64, 434, 197);
 		painelPrincipal.add(painelTabela);
 		painelTabela.setLayout(null);
+		
+		JPanel painelBotoes = new JPanel();
+		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+		painelBotoes.setBounds(10, 261, 434, 66);
+		painelPrincipal.add(painelBotoes);
+		painelBotoes.setLayout(null);
+		
+		JButton btnNovo = new JButton("");
+		btnNovo.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/group-delete-icon.png")));
+		btnNovo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnNovo.setBounds(10, 11, 53, 44);
+		painelBotoes.add(btnNovo);
+		
+		JButton btnEditar = new JButton("");
+		btnEditar.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/novo32.png")));
+		btnEditar.setBounds(73, 11, 53, 44);
+		painelBotoes.add(btnEditar);
+		
+		JButton btnExcluir = new JButton("");
+		btnExcluir.setBounds(136, 11, 53, 44);
+		painelBotoes.add(btnExcluir);
+		
+		JButton btnSair = new JButton("");
+		btnSair.setBounds(317, 11, 89, 44);
+		painelBotoes.add(btnSair);
 		
 		criarTabela();
 		
