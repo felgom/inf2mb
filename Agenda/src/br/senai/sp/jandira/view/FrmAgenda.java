@@ -18,6 +18,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class FrmAgenda extends JFrame {
 
@@ -27,9 +28,10 @@ public class FrmAgenda extends JFrame {
 	JPanel painelTabela;
 
 	public FrmAgenda() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/angenda48.png")));
 		setTitle("Agenda de contatos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 467, 377);
+		setBounds(100, 100, 467, 384);
 		painelPrincipal = new JPanel();
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
@@ -42,7 +44,9 @@ public class FrmAgenda extends JFrame {
 		painelTitulo.setLayout(null);
 		
 		JLabel lblTituloTela = new JLabel(" Agenda");
-		lblTituloTela.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/agenda48.png")));
+		lblTituloTela.setForeground(Color.BLACK);
+		lblTituloTela.setBackground(Color.WHITE);
+		lblTituloTela.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/angenda48.png")));
 		lblTituloTela.setFont(new Font("Arial", Font.BOLD, 32));
 		lblTituloTela.setBounds(10, 0, 414, 66);
 		painelTitulo.add(lblTituloTela);
@@ -55,30 +59,50 @@ public class FrmAgenda extends JFrame {
 		
 		JPanel painelBotoes = new JPanel();
 		painelBotoes.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-		painelBotoes.setBounds(10, 261, 434, 66);
+		painelBotoes.setBounds(10, 272, 434, 66);
 		painelPrincipal.add(painelBotoes);
 		painelBotoes.setLayout(null);
 		
 		JButton btnNovo = new JButton("");
+		btnNovo.setToolTipText("Adicionar contato");
 		btnNovo.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/novo32.png")));
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				FrmContato contato = new FrmContato("NOVO");
+				contato.setVisible(true);
 			}
 		});
 		btnNovo.setBounds(10, 11, 53, 44);
 		painelBotoes.add(btnNovo);
 		
 		JButton btnEditar = new JButton("");
-		btnEditar.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/novo32.png")));
+		btnEditar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				FrmContato contato = new FrmContato ("EDITAR");
+				contato.setVisible(true);
+			}
+		});
+		btnEditar.setToolTipText("Editar contato selecionado");
+		btnEditar.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/edit32.png")));
 		btnEditar.setBounds(73, 11, 53, 44);
 		painelBotoes.add(btnEditar);
 		
 		JButton btnExcluir = new JButton("");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FrmContato contato = new FrmContato ("EXCLUIR");
+				contato.setVisible(true);
+				
+			}
+		});
+		btnExcluir.setToolTipText("Excluir contato selecionado");
+		btnExcluir.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/delete32.png")));
 		btnExcluir.setBounds(136, 11, 53, 44);
 		painelBotoes.add(btnExcluir);
 		
 		JButton btnSair = new JButton("");
-		btnSair.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/sair24.png")));
+		btnSair.setToolTipText("Sair da aplica\u00E7\u00E3o");
+		btnSair.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/sair32.png")));
 		btnSair.setBounds(317, 11, 89, 44);
 		painelBotoes.add(btnSair);
 		
