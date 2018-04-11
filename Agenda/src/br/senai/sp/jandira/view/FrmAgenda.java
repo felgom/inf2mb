@@ -60,7 +60,7 @@ public class FrmAgenda extends JFrame {
 		painelBotoes.setLayout(null);
 		
 		JButton btnNovo = new JButton("");
-		btnNovo.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/group-delete-icon.png")));
+		btnNovo.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/novo32.png")));
 		btnNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -78,6 +78,7 @@ public class FrmAgenda extends JFrame {
 		painelBotoes.add(btnExcluir);
 		
 		JButton btnSair = new JButton("");
+		btnSair.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/sair24.png")));
 		btnSair.setBounds(317, 11, 89, 44);
 		painelBotoes.add(btnSair);
 		
