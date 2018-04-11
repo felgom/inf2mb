@@ -28,7 +28,6 @@ public class FrmContato extends JFrame {
 
 	
 	public FrmContato(String operacao) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 318, 471);
 		PainelPrincipal = new JPanel();
 		PainelPrincipal.setBackground(Color.WHITE);
@@ -52,7 +51,7 @@ public class FrmContato extends JFrame {
 		JLabel lblNovo = new JLabel(operacao);
 		lblNovo.setForeground(Color.GREEN);
 		lblNovo.setFont(new Font("Arial", Font.BOLD, 15));
-		lblNovo.setBounds(216, 11, 46, 14);
+		lblNovo.setBounds(202, 11, 78, 18);
 		PainelTitulo.add(lblNovo);
 		
 		JPanel PainelDados = new JPanel();
