@@ -15,6 +15,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class FrmContato extends JFrame {
 
@@ -126,6 +128,15 @@ public class FrmContato extends JFrame {
 		textEndreco.setWrapStyleWord(true);
 		textEndreco.setLineWrap(true);
 		scrollPane.setViewportView(textEndreco);
+		
+		JLabel lblSexo = new JLabel("Sexo:");
+		lblSexo.setBounds(173, 26, 46, 14);
+		PainelDados.add(lblSexo);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"M ", "F"}));
+		comboBox.setBounds(214, 23, 46, 20);
+		PainelDados.add(comboBox);
 		
 		JPanel bntBotoes = new JPanel();
 		bntBotoes.setBounds(10, 356, 290, 54);

@@ -2,6 +2,8 @@ package br.senai.sp.jandira.dao;
 
 import java.util.ArrayList;
 
+import javax.swing.text.DefaultEditorKit.InsertBreakAction;
+
 import br.senai.sp.jandira.model.Contato;
 
 public class ContatoDAO {
@@ -9,8 +11,12 @@ public class ContatoDAO {
 	private Contato contato;
 	
 	public void gravar () {
-	
+		String sql = "INSERT INTO contatos"
+				+ "(nome, dtNasc, email, endereco, telefone, celular, sexo)"
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?)";
 	}
+	
+	
 	
 	public void atualizar () {
 		
