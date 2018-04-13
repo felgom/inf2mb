@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.border.TitledBorder;
+
+import br.senai.sp.jandira.dao.ContatoDAO;
+import br.senai.sp.jandira.model.Contato;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
@@ -17,6 +21,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class FrmContato extends JFrame {
 
@@ -27,8 +33,8 @@ public class FrmContato extends JFrame {
 	private JTextField textCelular;
 	private JTextField textTelefone;
 	private JTextField textDataNasc;
-
 	
+
 	public FrmContato(String operacao) {
 		setBounds(100, 100, 318, 471);
 		PainelPrincipal = new JPanel();
@@ -133,10 +139,10 @@ public class FrmContato extends JFrame {
 		lblSexo.setBounds(173, 26, 46, 14);
 		PainelDados.add(lblSexo);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"M ", "F"}));
-		comboBox.setBounds(214, 23, 46, 20);
-		PainelDados.add(comboBox);
+		JComboBox cbSexo = new JComboBox();
+		cbSexo.setModel(new DefaultComboBoxModel(new String[] {"M ", "F"}));
+		cbSexo.setBounds(214, 23, 46, 20);
+		PainelDados.add(cbSexo);
 		
 		JPanel bntBotoes = new JPanel();
 		bntBotoes.setBounds(10, 356, 290, 54);
@@ -144,6 +150,26 @@ public class FrmContato extends JFrame {
 		bntBotoes.setLayout(null);
 		
 		JButton btnSair = new JButton("");
+		btnSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				Contato contato = new Contato();
+				contato.setNome(textNomeContato.getText());
+				contato.setEmail(textEmail.getText());
+				contato.setCelular(textCelular.getText());
+				contato.setTelefone(textTelefone.getText());
+				contato.setDtNasc(textDataNasc.getText());
+				contato.setEndereco(textEndreco.getText());
+				contato.setSexo(cbSexo.getSelectedItem().toString());
+				
+				ContatoDAO contatoDAO = new ContatoDAO();
+				contatoDAO.setContato(contato);
+				
+				if(lblNovo.getText().equals("novo")){
+					contatoDAO.gravar();
+				}
+			}
+		});
 		btnSair.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/salvar24.png")));
 		btnSair.setToolTipText("Salva contato");
 		btnSair.setBounds(10, 11, 47, 32);

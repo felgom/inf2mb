@@ -1,5 +1,7 @@
 package br.senai.sp.jandira.model;
 
+import javax.swing.JTextField;
+
 public class Contato {
 
 	private int id;
@@ -9,6 +11,16 @@ public class Contato {
 	private String telefone;
 	private String celular;
 	private String email;
+	private String sexo;
+	
+	
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
 
 	public int getId() {
 		return id;
