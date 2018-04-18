@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
 import javax.swing.text.DefaultEditorKit.InsertBreakAction;
 
 import br.senai.sp.jandira.dbUtils.Conexao;
@@ -30,6 +31,10 @@ public class ContatoDAO {
 			stm.setString(6, contato.getCelular());
 			stm.setString(6, contato.getCelular());
 			stm.setString(7, contato.getSexo());
+			stm.execute();
+			
+			JOptionPane.showMessageDialog(null, "Contato gravado com sucesso !!",
+					"Gravação", JOptionPane.INFORMATION_MESSAGE);
 			
 			
 			
