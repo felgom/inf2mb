@@ -25,6 +25,8 @@ public class FrmAgenda extends JFrame {
 	private JPanel painelTabela;
 
 	public FrmAgenda() {
+		setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/agenda32.png")));
 		setTitle("Agenda de contatos");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 390);
@@ -40,7 +42,7 @@ public class FrmAgenda extends JFrame {
 		painelTitulo.setLayout(null);
 		
 		JLabel lblTituloTela = new JLabel("Agenda");
-		lblTituloTela.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/angenda48.png")));
+		lblTituloTela.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/agenda32.png")));
 		lblTituloTela.setFont(new Font("Arial", Font.BOLD, 28));
 		lblTituloTela.setBounds(10, 11, 414, 44);
 		painelTitulo.add(lblTituloTela);
@@ -72,7 +74,6 @@ public class FrmAgenda extends JFrame {
 		painelBotoes.add(btnNovo);
 		
 		JButton btnEditar = new JButton("");
-		btnEditar.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/edit32.png")));
 		
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -82,12 +83,11 @@ public class FrmAgenda extends JFrame {
 		});
 		
 		btnEditar.setToolTipText("Editar contato");
-
+		btnEditar.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/editar32.png")));
 		btnEditar.setBounds(64, 11, 44, 44);
 		painelBotoes.add(btnEditar);
 		
 		JButton btnExcluir = new JButton("");
-		btnExcluir.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/delete32.png")));
 		
 		btnExcluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -97,7 +97,7 @@ public class FrmAgenda extends JFrame {
 		});
 		
 		btnExcluir.setToolTipText("Excluir contato");
-
+		btnExcluir.setIcon(new ImageIcon(FrmAgenda.class.getResource("/br/senai/sp/jandira/imagens/excluir32.png")));
 		btnExcluir.setBounds(118, 11, 44, 44);
 		painelBotoes.add(btnExcluir);
 		

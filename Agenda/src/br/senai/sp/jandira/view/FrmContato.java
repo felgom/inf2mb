@@ -1,11 +1,9 @@
 package br.senai.sp.jandira.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.ImageIcon;
@@ -14,11 +12,11 @@ import javax.swing.border.TitledBorder;
 import br.senai.sp.jandira.dao.ContatoDAO;
 import br.senai.sp.jandira.model.Contato;
 
-import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JScrollPane;
+import java.awt.Toolkit;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
@@ -26,159 +24,171 @@ import java.awt.event.ActionEvent;
 
 public class FrmContato extends JFrame {
 
-	private JPanel PainelPrincipal;
-	private JTextField textId;
-	private JTextField textNomeContato;
-	private JTextField textEmail;
-	private JTextField textCelular;
-	private JTextField textTelefone;
-	private JTextField textDataNasc;
-	
+	private JPanel painelPrincipal;
+	private JTextField txtId;
+	private JTextField txtNome;
+	private JTextField txtEmail;
+	private JTextField txtTelefone;
+	private JTextField txtCelular;
+	private JTextField txtDataDeNascimento;
+	private JTextArea txtEndereco;
+	private final JScrollPane scrollPane = new JScrollPane();
 
 	public FrmContato(String operacao) {
-		setBounds(100, 100, 318, 471);
-		PainelPrincipal = new JPanel();
-		PainelPrincipal.setBackground(Color.WHITE);
-		PainelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(PainelPrincipal);
-		PainelPrincipal.setLayout(null);
+		setResizable(false);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/editar32.png")));
+		setTitle("Dados do Contato");
+		setBounds(100, 100, 390, 478);
+		painelPrincipal = new JPanel();
+		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(painelPrincipal);
+		painelPrincipal.setLayout(null);
 		
-		JPanel PainelTitulo = new JPanel();
-		PainelTitulo.setBackground(Color.WHITE);
-		PainelTitulo.setBounds(10, 11, 290, 59);
-		PainelPrincipal.add(PainelTitulo);
-		PainelTitulo.setLayout(null);
+		JPanel painelTitulo = new JPanel();
+		painelTitulo.setLayout(null);
+		painelTitulo.setBackground(Color.WHITE);
+		painelTitulo.setBounds(0, 0, 374, 66);
+		painelPrincipal.add(painelTitulo);
 		
-		JLabel lblNovoContato = new JLabel(" Contato");
-		lblNovoContato.setBackground(Color.WHITE);
-		lblNovoContato.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/Contato48.png")));
-		lblNovoContato.setFont(new Font("Arial", Font.BOLD, 32));
-		lblNovoContato.setBounds(0, 0, 290, 59);
-		PainelTitulo.add(lblNovoContato);
+		JLabel lblTitulo = new JLabel("Contato");
+		lblTitulo.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/editar32.png")));
+		lblTitulo.setFont(new Font("Arial", Font.BOLD, 28));
+		lblTitulo.setBounds(10, 11, 176, 44);
+		painelTitulo.add(lblTitulo);
 		
-		JLabel lblNovo = new JLabel(operacao);
-		lblNovo.setForeground(Color.GREEN);
-		lblNovo.setFont(new Font("Arial", Font.BOLD, 15));
-		lblNovo.setBounds(202, 11, 78, 18);
-		PainelTitulo.add(lblNovo);
+		JLabel lblOperacao = new JLabel(operacao);
+		lblOperacao.setForeground(Color.BLUE);
+		lblOperacao.setFont(new Font("Arial", Font.PLAIN, 20));
+		lblOperacao.setBounds(271, 24, 93, 24);
+		painelTitulo.add(lblOperacao);
 		
-		JPanel PainelDados = new JPanel();
-		PainelDados.setBorder(new TitledBorder(null, "Dados", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
-		PainelDados.setBounds(10, 81, 290, 275);
-		PainelPrincipal.add(PainelDados);
-		PainelDados.setLayout(null);
+		JPanel painelConteudo = new JPanel();
+		painelConteudo.setBorder(new TitledBorder(null, "Dados:", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
+		painelConteudo.setBounds(10, 64, 354, 287);
+		painelPrincipal.add(painelConteudo);
+		painelConteudo.setLayout(null);
 		
 		JLabel lblId = new JLabel("ID:");
-		lblId.setBounds(10, 26, 46, 14);
-		PainelDados.add(lblId);
+		lblId.setBounds(10, 25, 26, 14);
+		painelConteudo.add(lblId);
 		
-		textId = new JTextField();
-		textId.setBounds(117, 23, 46, 20);
-		PainelDados.add(textId);
-		textId.setColumns(10);
+		txtId = new JTextField();
+		txtId.setEditable(false);
+		txtId.setBounds(129, 22, 46, 20);
+		painelConteudo.add(txtId);
+		txtId.setColumns(10);
 		
-		JLabel lblNomeDoContato = new JLabel("Nome do Contato:");
-		lblNomeDoContato.setBounds(10, 57, 96, 14);
-		PainelDados.add(lblNomeDoContato);
+		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setBounds(10, 58, 38, 14);
+		painelConteudo.add(lblNome);
 		
-		textNomeContato = new JTextField();
-		textNomeContato.setBounds(117, 54, 159, 20);
-		PainelDados.add(textNomeContato);
-		textNomeContato.setColumns(10);
+		txtNome = new JTextField();
+		txtNome.setBounds(129, 55, 215, 20);
+		painelConteudo.add(txtNome);
+		txtNome.setColumns(10);
 		
 		JLabel lblEmail = new JLabel("E-mail:");
-		lblEmail.setBounds(10, 86, 46, 14);
-		PainelDados.add(lblEmail);
+		lblEmail.setBounds(10, 120, 38, 14);
+		painelConteudo.add(lblEmail);
 		
-		textEmail = new JTextField();
-		textEmail.setBounds(117, 83, 159, 20);
-		PainelDados.add(textEmail);
-		textEmail.setColumns(10);
-		
-		JLabel lblCelular = new JLabel("Celular:");
-		lblCelular.setBounds(10, 114, 46, 14);
-		PainelDados.add(lblCelular);
-		
-		textCelular = new JTextField();
-		textCelular.setBounds(117, 111, 159, 20);
-		PainelDados.add(textCelular);
-		textCelular.setColumns(10);
-		
-		textTelefone = new JTextField();
-		textTelefone.setBounds(117, 142, 159, 20);
-		PainelDados.add(textTelefone);
-		textTelefone.setColumns(10);
+		txtEmail = new JTextField();
+		txtEmail.setBounds(129, 117, 215, 20);
+		painelConteudo.add(txtEmail);
+		txtEmail.setColumns(10);
 		
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(10, 145, 46, 14);
-		PainelDados.add(lblTelefone);
+		lblTelefone.setBounds(10, 147, 57, 14);
+		painelConteudo.add(lblTelefone);
 		
-		JLabel lblDataDeNascimento = new JLabel("Data de nascimento:");
-		lblDataDeNascimento.setBounds(10, 176, 99, 14);
-		PainelDados.add(lblDataDeNascimento);
+		txtTelefone = new JTextField();
+		txtTelefone.setBounds(129, 144, 215, 20);
+		painelConteudo.add(txtTelefone);
+		txtTelefone.setColumns(10);
 		
-		textDataNasc = new JTextField();
-		textDataNasc.setBounds(117, 173, 159, 20);
-		PainelDados.add(textDataNasc);
-		textDataNasc.setColumns(10);
+		JLabel lblCelular = new JLabel("Celular:");
+		lblCelular.setBounds(10, 178, 46, 14);
+		painelConteudo.add(lblCelular);
+		
+		txtCelular = new JTextField();
+		txtCelular.setBounds(129, 175, 215, 20);
+		painelConteudo.add(txtCelular);
+		txtCelular.setColumns(10);
 		
 		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
-		lblEndereo.setBounds(10, 201, 62, 14);
-		PainelDados.add(lblEndereo);
+		lblEndereo.setBounds(10, 237, 73, 14);
+		painelConteudo.add(lblEndereo);
 		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(117, 204, 163, 60);
-		PainelDados.add(scrollPane);
+		JLabel lblDataDeNascimento = new JLabel("Data de nascimento:");
+		lblDataDeNascimento.setBounds(10, 212, 115, 14);
+		painelConteudo.add(lblDataDeNascimento);
 		
-		JTextArea textEndreco = new JTextArea();
-		textEndreco.setWrapStyleWord(true);
-		textEndreco.setLineWrap(true);
-		scrollPane.setViewportView(textEndreco);
+		txtDataDeNascimento = new JTextField();
+		txtDataDeNascimento.setBounds(129, 206, 215, 20);
+		painelConteudo.add(txtDataDeNascimento);
+		txtDataDeNascimento.setColumns(10);
+		scrollPane.setBounds(129, 231, 215, 45);
+		painelConteudo.add(scrollPane);
+		
+		txtEndereco = new JTextArea();
+		scrollPane.setViewportView(txtEndereco);
+		txtEndereco.setLineWrap(true);
+		txtEndereco.setWrapStyleWord(true);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(173, 26, 46, 14);
-		PainelDados.add(lblSexo);
+		lblSexo.setBounds(10, 89, 38, 14);
+		painelConteudo.add(lblSexo);
 		
-		JComboBox cbSexo = new JComboBox();
-		cbSexo.setModel(new DefaultComboBoxModel(new String[] {"M ", "F"}));
-		cbSexo.setBounds(214, 23, 46, 20);
-		PainelDados.add(cbSexo);
+		JComboBox cbbSexo = new JComboBox();
+		cbbSexo.setModel(new DefaultComboBoxModel(new String[] {"M", "F"}));
+		cbbSexo.setBounds(129, 86, 38, 20);
+		painelConteudo.add(cbbSexo);
 		
-		JPanel bntBotoes = new JPanel();
-		bntBotoes.setBounds(10, 356, 290, 54);
-		PainelPrincipal.add(bntBotoes);
-		bntBotoes.setLayout(null);
+		JPanel painelBotoes = new JPanel();
+		painelBotoes.setBounds(10, 362, 354, 66);
+		painelPrincipal.add(painelBotoes);
+		painelBotoes.setLayout(null);
 		
-		JButton btnSair = new JButton("");
-		btnSair.addActionListener(new ActionListener() {
+		JButton btnSalvar = new JButton("");
+		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
 				Contato contato = new Contato();
-				contato.setNome(textNomeContato.getText());
-				contato.setEmail(textEmail.getText());
-				contato.setCelular(textCelular.getText());
-				contato.setTelefone(textTelefone.getText());
-				contato.setDtNasc(textDataNasc.getText());
-				contato.setEndereco(textEndreco.getText());
-				contato.setSexo(cbSexo.getSelectedItem().toString());
+				contato.setNome(txtNome.getText());
+				contato.setEmail(txtEmail.getText());
+				contato.setSexo(cbbSexo.getSelectedItem().toString());
+				contato.setTelefone(txtTelefone.getText());
+				contato.setCelular(txtCelular.getText());
+				contato.setDtNasc(txtDataDeNascimento.getText());
+				contato.setEndereco(txtEndereco.getText());
 				
-				ContatoDAO contatoDAO = new ContatoDAO();
-				contatoDAO.setContato(contato);
+				ContatoDAO contatoDao = new ContatoDAO();
+				contatoDao.setContato(contato);
 				
-				if(lblNovo.getText().equals("novo")){
-					contatoDAO.gravar();
+				if(lblOperacao.getText().equals("NOVO")){
+					contatoDao.gravar();
 				}
+				limparControles();
 			}
 		});
-		btnSair.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/salvar24.png")));
-		btnSair.setToolTipText("Salva contato");
-		btnSair.setBounds(10, 11, 47, 32);
-		bntBotoes.add(btnSair);
+		btnSalvar.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/salvar32.png")));
+		btnSalvar.setToolTipText("Salvar");
+		btnSalvar.setBounds(10, 11, 46, 44);
+		painelBotoes.add(btnSalvar);
 		
-		JButton btnNewButton_1 = new JButton("");
-		btnNewButton_1.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/sair24.png")));
-		btnNewButton_1.setToolTipText("Sair");
-		btnNewButton_1.setBounds(233, 11, 47, 32);
-		bntBotoes.add(btnNewButton_1);
+		JButton btnSair = new JButton("");
+		btnSair.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/sair32.png")));
+		btnSair.setToolTipText("Sair");
+		btnSair.setBounds(300, 11, 44, 44);
+		painelBotoes.add(btnSair);
+	}
+	
+	private void limparControles(){
+		txtNome.setText("");
+		txtEmail.setText("");
+		txtTelefone.setText("");
+		txtCelular.setText("");
+		txtDataDeNascimento.setText("");
+		txtEndereco.setText("");
+		txtNome.requestFocus();
+		
 	}
 }
