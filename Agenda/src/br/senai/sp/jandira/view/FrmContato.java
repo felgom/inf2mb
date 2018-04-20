@@ -38,7 +38,7 @@ public class FrmContato extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/editar32.png")));
 		setTitle("Dados do Contato");
-		setBounds(100, 100, 390, 478);
+		setBounds(100, 100, 311, 478);
 		painelPrincipal = new JPanel();
 		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(painelPrincipal);
@@ -47,7 +47,7 @@ public class FrmContato extends JFrame {
 		JPanel painelTitulo = new JPanel();
 		painelTitulo.setLayout(null);
 		painelTitulo.setBackground(Color.WHITE);
-		painelTitulo.setBounds(0, 0, 374, 66);
+		painelTitulo.setBounds(0, 0, 296, 66);
 		painelPrincipal.add(painelTitulo);
 		
 		JLabel lblTitulo = new JLabel("Contato");
@@ -59,12 +59,12 @@ public class FrmContato extends JFrame {
 		JLabel lblOperacao = new JLabel(operacao);
 		lblOperacao.setForeground(Color.BLUE);
 		lblOperacao.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblOperacao.setBounds(271, 24, 93, 24);
+		lblOperacao.setBounds(168, 11, 93, 24);
 		painelTitulo.add(lblOperacao);
 		
 		JPanel painelConteudo = new JPanel();
 		painelConteudo.setBorder(new TitledBorder(null, "Dados:", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
-		painelConteudo.setBounds(10, 64, 354, 287);
+		painelConteudo.setBounds(10, 64, 295, 287);
 		painelPrincipal.add(painelConteudo);
 		painelConteudo.setLayout(null);
 		
@@ -83,7 +83,7 @@ public class FrmContato extends JFrame {
 		painelConteudo.add(lblNome);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(129, 55, 215, 20);
+		txtNome.setBounds(129, 55, 154, 20);
 		painelConteudo.add(txtNome);
 		txtNome.setColumns(10);
 		
@@ -92,7 +92,7 @@ public class FrmContato extends JFrame {
 		painelConteudo.add(lblEmail);
 		
 		txtEmail = new JTextField();
-		txtEmail.setBounds(129, 117, 215, 20);
+		txtEmail.setBounds(129, 117, 154, 20);
 		painelConteudo.add(txtEmail);
 		txtEmail.setColumns(10);
 		
@@ -101,7 +101,7 @@ public class FrmContato extends JFrame {
 		painelConteudo.add(lblTelefone);
 		
 		txtTelefone = new JTextField();
-		txtTelefone.setBounds(129, 144, 215, 20);
+		txtTelefone.setBounds(129, 144, 154, 20);
 		painelConteudo.add(txtTelefone);
 		txtTelefone.setColumns(10);
 		
@@ -110,7 +110,7 @@ public class FrmContato extends JFrame {
 		painelConteudo.add(lblCelular);
 		
 		txtCelular = new JTextField();
-		txtCelular.setBounds(129, 175, 215, 20);
+		txtCelular.setBounds(129, 175, 154, 20);
 		painelConteudo.add(txtCelular);
 		txtCelular.setColumns(10);
 		
@@ -123,28 +123,29 @@ public class FrmContato extends JFrame {
 		painelConteudo.add(lblDataDeNascimento);
 		
 		txtDataDeNascimento = new JTextField();
-		txtDataDeNascimento.setBounds(129, 206, 215, 20);
+		txtDataDeNascimento.setBounds(129, 206, 154, 20);
 		painelConteudo.add(txtDataDeNascimento);
 		txtDataDeNascimento.setColumns(10);
-		scrollPane.setBounds(129, 231, 215, 45);
+		scrollPane.setBounds(129, 231, 154, 45);
 		painelConteudo.add(scrollPane);
 		
-		txtEndereco = new JTextArea();
-		scrollPane.setViewportView(txtEndereco);
-		txtEndereco.setLineWrap(true);
-		txtEndereco.setWrapStyleWord(true);
-		
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(10, 89, 38, 14);
+		lblSexo.setBounds(197, 25, 38, 14);
 		painelConteudo.add(lblSexo);
 		
 		JComboBox cbbSexo = new JComboBox();
 		cbbSexo.setModel(new DefaultComboBoxModel(new String[] {"M", "F"}));
-		cbbSexo.setBounds(129, 86, 38, 20);
+		cbbSexo.setBounds(245, 22, 38, 20);
 		painelConteudo.add(cbbSexo);
 		
+		txtEndereco = new JTextArea();
+		txtEndereco.setBounds(131, 232, 154, 43);
+		painelConteudo.add(txtEndereco);
+		txtEndereco.setLineWrap(true);
+		txtEndereco.setWrapStyleWord(true);
+		
 		JPanel painelBotoes = new JPanel();
-		painelBotoes.setBounds(10, 362, 354, 66);
+		painelBotoes.setBounds(10, 362, 286, 66);
 		painelPrincipal.add(painelBotoes);
 		painelBotoes.setLayout(null);
 		
@@ -177,7 +178,7 @@ public class FrmContato extends JFrame {
 		JButton btnSair = new JButton("");
 		btnSair.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/sair32.png")));
 		btnSair.setToolTipText("Sair");
-		btnSair.setBounds(300, 11, 44, 44);
+		btnSair.setBounds(238, 11, 44, 44);
 		painelBotoes.add(btnSair);
 	}
 	
