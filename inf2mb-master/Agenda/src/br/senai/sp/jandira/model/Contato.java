@@ -1,7 +1,6 @@
 package br.senai.sp.jandira.model;
 
 public class Contato {
-	
 	private int id;
 	private String nome;
 	private String dtNasc;
@@ -10,9 +9,7 @@ public class Contato {
 	private String celular;
 	private String email;
 	private String sexo;
-	
-	
-	
+
 	public int getId() {
 		return id;
 	}
@@ -61,5 +58,5 @@ public class Contato {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
 }
+

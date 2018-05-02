@@ -1,194 +1,282 @@
 package br.senai.sp.jandira.view;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
-import javax.swing.ImageIcon;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.text.MaskFormatter;
 
 import br.senai.sp.jandira.dao.ContatoDAO;
 import br.senai.sp.jandira.model.Contato;
 
-import javax.swing.JTextField;
+import java.awt.TextArea;
 import javax.swing.JTextArea;
 import javax.swing.JButton;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
-import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFormattedTextField;
 
 public class FrmContato extends JFrame {
 
-	private JPanel painelPrincipal;
-	private JTextField txtId;
+	private JPanel contentPane;
+	private JTextField txtID;
 	private JTextField txtNome;
+	//private JTextField txtDtNasc;
 	private JTextField txtEmail;
 	private JTextField txtTelefone;
 	private JTextField txtCelular;
-	private JTextField txtDataDeNascimento;
 	private JTextArea txtEndereco;
-	private final JScrollPane scrollPane = new JScrollPane();
+	private JComboBox cbSexo;
+	private JFormattedTextField txtDtNasc;
+	
+
+	public void setCbSexo(String cbSexo) {
+		this.cbSexo.setSelectedItem(cbSexo);
+	}
+
+	public void setTxtID(String txtID) {
+		this.txtID.setText(txtID);
+	}
+	
+	public void setTxtNome(String txtNome) {
+		this.txtNome.setText(txtNome);
+	}
+
+	public void setTxtDtNasc(String txtDtNasc) {
+		this.txtDtNasc.setText(txtDtNasc);
+	}
+
+	public void setTxtEmail(String txtEmail) {
+		this.txtEmail.setText(txtEmail);
+	}
+
+	public void setTxtTelefone(String txtTelefone) {
+		this.txtTelefone.setText(txtTelefone);
+	}
+
+	public void setTxtCelular(String txtCelular) {
+		this.txtCelular.setText(txtCelular);
+	}
+
+	public void setTxtEndereco(String txtEndereco) {
+		this.txtEndereco.setText(txtEndereco);
+	}
 
 	public FrmContato(String operacao) {
+		setTitle("  ");
 		setResizable(false);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/editar32.png")));
-		setTitle("Dados do Contato");
-		setBounds(100, 100, 378, 478);
-		painelPrincipal = new JPanel();
-		painelPrincipal.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(painelPrincipal);
-		painelPrincipal.setLayout(null);
+		setBounds(100, 100, 483, 615);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JPanel painelTitulo = new JPanel();
+		painelTitulo.setBackground(new Color(135, 206, 250));
+		painelTitulo.setBounds(0, 0, 479, 115);
+		contentPane.add(painelTitulo);
 		painelTitulo.setLayout(null);
-		painelTitulo.setBackground(Color.WHITE);
-		painelTitulo.setBounds(0, 0, 374, 66);
-		painelPrincipal.add(painelTitulo);
 		
-		JLabel lblTitulo = new JLabel("Contato");
-		lblTitulo.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/editar32.png")));
-		lblTitulo.setFont(new Font("Arial", Font.BOLD, 28));
-		lblTitulo.setBounds(10, 11, 176, 44);
-		painelTitulo.add(lblTitulo);
+		JLabel lblContato = new JLabel("Contato");
+		lblContato.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/contato.png")));
+		lblContato.setFont(new Font("Myriad Pro Light", Font.PLAIN, 32));
+		lblContato.setBounds(47, 11, 188, 81);
+		painelTitulo.add(lblContato);
 		
-		JLabel lblOperacao = new JLabel(operacao);
-		lblOperacao.setForeground(Color.BLUE);
-		lblOperacao.setFont(new Font("Arial", Font.PLAIN, 20));
-		lblOperacao.setBounds(271, 24, 93, 24);
-		painelTitulo.add(lblOperacao);
+		JLabel lblStatus = new JLabel(operacao);
+		lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
+		lblStatus.setForeground(new Color(128, 128, 0));
+		lblStatus.setBackground(new Color(135, 206, 235));
+		lblStatus.setFont(new Font("Monospaced", Font.BOLD, 22));
+		lblStatus.setBounds(343, 33, 96, 35);
+		painelTitulo.add(lblStatus);
 		
-		JPanel painelConteudo = new JPanel();
-		painelConteudo.setBorder(new TitledBorder(null, "Dados:", TitledBorder.LEADING, TitledBorder.TOP, null, Color.BLUE));
-		painelConteudo.setBounds(10, 64, 354, 287);
-		painelPrincipal.add(painelConteudo);
-		painelConteudo.setLayout(null);
+		JPanel painelPrincipal = new JPanel();
+		painelPrincipal.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		painelPrincipal.setBounds(10, 126, 459, 364);
+		contentPane.add(painelPrincipal);
+		painelPrincipal.setLayout(null);
 		
-		JLabel lblId = new JLabel("ID:");
-		lblId.setBounds(10, 25, 26, 14);
-		painelConteudo.add(lblId);
-		
-		txtId = new JTextField();
-		txtId.setEditable(false);
-		txtId.setBounds(129, 22, 46, 20);
-		painelConteudo.add(txtId);
-		txtId.setColumns(10);
+		JLabel lblID = new JLabel("ID:");
+		lblID.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblID.setBounds(43, 27, 46, 30);
+		painelPrincipal.add(lblID);
 		
 		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(10, 58, 38, 14);
-		painelConteudo.add(lblNome);
-		
-		txtNome = new JTextField();
-		txtNome.setBounds(129, 55, 215, 20);
-		painelConteudo.add(txtNome);
-		txtNome.setColumns(10);
+		lblNome.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNome.setBounds(43, 68, 46, 23);
+		painelPrincipal.add(lblNome);
 		
 		JLabel lblEmail = new JLabel("E-mail:");
-		lblEmail.setBounds(10, 120, 38, 14);
-		painelConteudo.add(lblEmail);
-		
-		txtEmail = new JTextField();
-		txtEmail.setBounds(129, 117, 215, 20);
-		painelConteudo.add(txtEmail);
-		txtEmail.setColumns(10);
+		lblEmail.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblEmail.setBounds(43, 148, 46, 23);
+		painelPrincipal.add(lblEmail);
 		
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(10, 147, 57, 14);
-		painelConteudo.add(lblTelefone);
-		
-		txtTelefone = new JTextField();
-		txtTelefone.setBounds(129, 144, 215, 20);
-		painelConteudo.add(txtTelefone);
-		txtTelefone.setColumns(10);
+		lblTelefone.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblTelefone.setBounds(43, 182, 57, 30);
+		painelPrincipal.add(lblTelefone);
 		
 		JLabel lblCelular = new JLabel("Celular:");
-		lblCelular.setBounds(10, 178, 46, 14);
-		painelConteudo.add(lblCelular);
+		lblCelular.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblCelular.setBounds(216, 182, 46, 30);
+		painelPrincipal.add(lblCelular);
 		
-		txtCelular = new JTextField();
-		txtCelular.setBounds(129, 175, 215, 20);
-		painelConteudo.add(txtCelular);
-		txtCelular.setColumns(10);
-		
-		JLabel lblEndereo = new JLabel("Endere\u00E7o:");
-		lblEndereo.setBounds(10, 237, 73, 14);
-		painelConteudo.add(lblEndereo);
+		JLabel lblEndereco = new JLabel("Endere\u00E7o:");
+		lblEndereco.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblEndereco.setBounds(43, 234, 57, 35);
+		painelPrincipal.add(lblEndereco);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de nascimento:");
-		lblDataDeNascimento.setBounds(10, 212, 115, 14);
-		painelConteudo.add(lblDataDeNascimento);
+		lblDataDeNascimento.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblDataDeNascimento.setBounds(43, 102, 120, 35);
+		painelPrincipal.add(lblDataDeNascimento);
 		
-		txtDataDeNascimento = new JTextField();
-		txtDataDeNascimento.setBounds(129, 206, 215, 20);
-		painelConteudo.add(txtDataDeNascimento);
-		txtDataDeNascimento.setColumns(10);
-		scrollPane.setBounds(129, 231, 215, 45);
-		painelConteudo.add(scrollPane);
+		txtID = new JTextField();
+		txtID.setEnabled(false);
+		txtID.setBounds(74, 33, 86, 20);
+		painelPrincipal.add(txtID);
+		txtID.setColumns(10);
+		
+		txtNome = new JTextField();
+		txtNome.setBounds(84, 70, 306, 20);
+		painelPrincipal.add(txtNome);
+		txtNome.setColumns(10);
+		//Definir mascara da data
+		MaskFormatter dateMask = null;
+		try {
+			dateMask = new MaskFormatter("##/##/####");
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		txtDtNasc = new JFormattedTextField(dateMask);
+		txtDtNasc.setBounds(162, 110, 120, 20);
+		painelPrincipal.add(txtDtNasc);
+		txtDtNasc.setColumns(10);
+		
+		txtEmail = new JTextField();
+		txtEmail.setBounds(99, 150, 233, 20);
+		painelPrincipal.add(txtEmail);
+		txtEmail.setColumns(10);
+		
+		txtTelefone = new JTextField();
+		txtTelefone.setBounds(99, 188, 107, 20);
+		painelPrincipal.add(txtTelefone);
+		txtTelefone.setColumns(10);
+		
+		txtCelular = new JTextField();
+		txtCelular.setBounds(283, 188, 107, 20);
+		painelPrincipal.add(txtCelular);
+		txtCelular.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(110, 234, 280, 92);
+		painelPrincipal.add(scrollPane);
 		
 		txtEndereco = new JTextArea();
-		scrollPane.setViewportView(txtEndereco);
 		txtEndereco.setLineWrap(true);
 		txtEndereco.setWrapStyleWord(true);
+		scrollPane.setViewportView(txtEndereco);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(10, 89, 38, 14);
-		painelConteudo.add(lblSexo);
+		lblSexo.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblSexo.setBounds(313, 112, 38, 14);
+		painelPrincipal.add(lblSexo);
 		
-		JComboBox cbbSexo = new JComboBox();
-		cbbSexo.setModel(new DefaultComboBoxModel(new String[] {"M", "F"}));
-		cbbSexo.setBounds(129, 86, 38, 20);
-		painelConteudo.add(cbbSexo);
+		cbSexo = new JComboBox();
+		cbSexo.setModel(new DefaultComboBoxModel(new String[] {"M", "F"}));
+		cbSexo.setBounds(347, 110, 61, 20);
+		painelPrincipal.add(cbSexo);
 		
 		JPanel painelBotoes = new JPanel();
-		painelBotoes.setBounds(10, 362, 354, 66);
-		painelPrincipal.add(painelBotoes);
+		painelBotoes.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		painelBotoes.setBounds(10, 505, 459, 60);
+		contentPane.add(painelBotoes);
 		painelBotoes.setLayout(null);
 		
 		JButton btnSalvar = new JButton("");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Contato contato = new Contato();
-				contato.setNome(txtNome.getText());
-				contato.setEmail(txtEmail.getText());
-				contato.setSexo(cbbSexo.getSelectedItem().toString());
-				contato.setTelefone(txtTelefone.getText());
-				contato.setCelular(txtCelular.getText());
-				contato.setDtNasc(txtDataDeNascimento.getText());
-				contato.setEndereco(txtEndereco.getText());
+					SimpleDateFormat toDate = new SimpleDateFormat("dd/MM/yyyy");
+					SimpleDateFormat toDataBase = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss.000000");
+					Date usuarioDate = null;
+					String dateBanco  = null;
+					try {
+						usuarioDate = toDate.parse(txtDtNasc.getText());
+						dateBanco = toDataBase.format(usuarioDate);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
 				
-				ContatoDAO contatoDao = new ContatoDAO();
-				contatoDao.setContato(contato);
-				
-				if(lblOperacao.getText().equals("NOVO")){
-					contatoDao.gravar();
-				}
-				limparControles();
+					Contato contato = new Contato();
+					contato.setNome(txtNome.getText());
+					contato.setEmail(txtEmail.getText());
+					contato.setDtNasc(dateBanco);
+					contato.setCelular(txtCelular.getText());
+					contato.setTelefone(txtTelefone.getText());
+					contato.setEndereco(txtEndereco.getText());
+					contato.setSexo(cbSexo.getSelectedItem().toString());
+					ContatoDAO contatoDAO = new ContatoDAO();
+					contatoDAO.setContato(contato);
+					
+					
+					
+					if(lblStatus.getText().equals("NOVO")){
+						contatoDAO.gravar();
+						limparControles();
+						System.out.println("Gravando...");
+					}
+					else if (lblStatus.getText().equals("EDITAR")){
+						contatoDAO.atualizar(Integer.parseInt(txtID.getText()));
+						System.out.println("Editando...");
+					}
+					else if(lblStatus.getText().equals("EXCLUIR")){
+						int resposta = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir" + contato.getNome() + "?", "Atenção", JOptionPane.YES_NO_CANCEL_OPTION);
+						if(resposta == 0){
+							contatoDAO.excluir(Integer.parseInt(txtID.getText()));
+						}
+						
+						System.out.println("Deletar...");
+					}
+
+						
+					
 			}
 		});
-		btnSalvar.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/salvar32.png")));
-		btnSalvar.setToolTipText("Salvar");
-		btnSalvar.setBounds(10, 11, 46, 44);
+		btnSalvar.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/salvar.png")));
+		btnSalvar.setBounds(78, 11, 66, 38);
 		painelBotoes.add(btnSalvar);
 		
-		JButton btnSair = new JButton("");
-		btnSair.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/sair32.png")));
-		btnSair.setToolTipText("Sair");
-		btnSair.setBounds(300, 11, 44, 44);
-		painelBotoes.add(btnSair);
+		JButton button = new JButton("");
+		button.setIcon(new ImageIcon(FrmContato.class.getResource("/br/senai/sp/jandira/imagens/sair.png")));
+		button.setBounds(341, 11, 66, 38);
+		painelBotoes.add(button);
 	}
-	
 	private void limparControles(){
 		txtNome.setText("");
 		txtEmail.setText("");
-		txtTelefone.setText("");
+		txtDtNasc.setText("");
 		txtCelular.setText("");
-		txtDataDeNascimento.setText("");
+		txtTelefone.setText("");
 		txtEndereco.setText("");
 		txtNome.requestFocus();
-		
 	}
 }
